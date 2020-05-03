@@ -1,0 +1,33 @@
+:root {
+  --global-font-family: Verdana, sans-serif;
+  --global-font-size: 0.8rem;
+  --global-text-color: #222;
+  --global-color-priorbank-yellow: #ffd600;
+}
+
+a {
+  color: #000000;
+}
+
+button {
+  color: #fff;
+  background-color: var(--global-color-priorbank-yellow) !important;
+  border-color: var(--global-color-priorbank-yellow) !important;
+  &:focus {
+    outline: none !important;
+    border: 2px solid var(--global-color-priorbank-yellow) !important;
+    box-shadow: 0 0 5px var(--global-color-priorbank-yellow) !important;
+  }
+}
+
+input:focus {
+  outline: none !important;
+  border: 2px solid var(--global-color-priorbank-yellow) !important;
+  box-shadow: 0 0 5px var(--global-color-priorbank-yellow) !important;
+}
+
+select:focus {
+  outline: none !important;
+  border: 2px solid var(--global-color-priorbank-yellow) !important;
+  box-shadow: 0 0 5px var(--global-color-priorbank-yellow) !important;
+}
