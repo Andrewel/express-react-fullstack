@@ -6,15 +6,23 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { ConnectedTaskList } from './TaskList';
+import { ConnectedDepositList } from './DepositList';
 
-const Dashboard = ({groups})=>(
-    <div className="row">
-        {groups.map(group=>(
-            <ConnectedTaskList key={group.id} {...group} className="col"/>
-        ))}
-    </div>
+const Dashboard = ({ groups }) => (
+  <div className='row'>
+    {groups.map((group) =>
+      group.name !== 'Депозиты' ? (
+        <ConnectedTaskList key={group.id} {...group} className='col' />
+      ) : null
+    )}
+    {groups.map((group) =>
+      group.name === 'Депозиты' ? (
+        <ConnectedDepositList key={group.id} {...group} className='col' />
+      ) : null
+    )}
+  </div>
 );
 
-const mapStateToProps = ({groups})=>({groups});
+const mapStateToProps = ({ groups }) => ({ groups });
 
 export const ConnectedDashboard = connect(mapStateToProps)(Dashboard);

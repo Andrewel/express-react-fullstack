@@ -49,6 +49,7 @@ export const authenticationRoute = (app) => {
 
     let userID = uuid();
     let groupID = uuid();
+    let groupID2 = uuid();
 
     await collection.insertOne({
       name: username,
@@ -59,7 +60,13 @@ export const authenticationRoute = (app) => {
     await db.collection(`groups`).insertOne({
       id: groupID,
       owner: userID,
-      name: `Clients Group`,
+      name: `Клиенты`,
+    });
+
+    await db.collection(`groups`).insertOne({
+      id: groupID2,
+      owner: userID,
+      name: `Депозиты`,
     });
 
     let state = await assembleUserState({ id: userID, name: username });

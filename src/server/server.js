@@ -9,7 +9,14 @@ import './initialize-db';
 import { authenticationRoute } from './authenticate';
 
 import { connectDB } from './connect-db';
-import { addNewTask, updateTask, deleteTask } from './communicate-db';
+import {
+  addNewTask,
+  updateTask,
+  deleteTask,
+  addNewDeposit,
+  updateDeposit,
+  deleteDeposit,
+} from './communicate-db';
 
 let port = process.env.PORT || 7777;
 let app = express();
@@ -26,6 +33,7 @@ if (process.env.NODE_ENV == `production`) {
   });
 }
 
+/* TASK */
 app.post('/task/new', async (req, res) => {
   // let task = req.body.task;
   /*  let db = await connectDB(); */
@@ -52,3 +60,31 @@ app.post('/comment/new', async (req, res) => {
   await collection.insertOne(comment);
   res.status(200).send();
 });
+
+/* DEPOSIT */
+app.post('/deposit/new', async (req, res) => {
+  // let deposit = req.body.deposit;
+  /*  let db = await connectDB(); */
+  await addNewDeposit(req.body.deposit);
+  res.status(200).send();
+});
+
+app.post('/deposit/update', async (req, res) => {
+  let db = await connectDB();
+  await updateDeposit(req.body.deposit);
+  res.status(200).send();
+});
+
+app.post('/deposit/delete', async (req, res) => {
+  let db = await connectDB();
+  await deleteDeposit(req.body.depositID);
+  res.status(200).send('Delete successful');
+});
+
+/* app.post('/comment/new', async (req, res) => {
+  let comment = req.body.comment;
+  let db = await connectDB();
+  let collection = db.collection(`comments`);
+  await collection.insertOne(comment);
+  res.status(200).send();
+}); */

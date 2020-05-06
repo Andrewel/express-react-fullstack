@@ -7,6 +7,7 @@ import * as mutations from './mutations';
 const url =
   process.env.NODE_ENV === 'production' ? `` : `http://localhost:7777`;
 
+/* TASK */
 export function* taskCreationSaga() {
   while (true) {
     const { groupID } = yield take(mutations.REQUEST_TASK_CREATION);
@@ -19,11 +20,11 @@ export function* taskCreationSaga() {
         group: groupID,
         owner: ownerID,
         isComplete: false,
-        name: 'New Client',
-        birthdate: 'New birthdate',
-        address: 'New address',
-        phone: 'New phone',
-        email: 'New email',
+        name: 'Новый Клиент',
+        birthdate: '11.11.2011',
+        address: 'ул. Пушкина, д. 28',
+        phone: '+375293383878',
+        email: 'bank@gmail.com',
         income: 0,
         city: 'Minsk',
         isOld: false,
@@ -84,6 +85,86 @@ export function* taskModificationSaga() {
   }
 }
 
+/* DEPOSITS */
+export function* depositCreationSaga() {
+  while (true) {
+    const { groupID } = yield take(mutations.REQUEST_DEPOSIT_CREATION);
+    const ownerID = yield select((state) => state.session.id);
+    const depositID = uuid();
+    let mutation = mutations.createDeposit(depositID, groupID, ownerID);
+    const { res } = yield axios.post(url + `/deposit/new`, {
+      deposit: {
+        id: depositID,
+        group: groupID,
+        owner: ownerID,
+        isComplete: false,
+        name: 'Новый Депозит',
+        startdate: '11.11.2011',
+        enddate: '11.11.2012',
+        address: 'ул. Пушкина, д. 28',
+        phone: '+375293383878',
+        email: 'bank@gmail.com',
+        income: 0,
+        city: '',
+        isOld: false,
+        gender: 'male',
+      },
+    });
+    yield put(mutation);
+  }
+}
+
+export function* depositDeletionSaga() {
+  while (true) {
+    const { depositID } = yield take(mutations.DELETE_DEPOSIT);
+    console.log(depositID);
+    axios.post(url + `/deposit/delete`, { depositID });
+    history.push('/dashboard');
+  }
+}
+
+/* export function* commentCreationSaga() {
+  while (true) {
+    const comment = yield take(mutations.ADD_DEPOSIT_COMMENT);
+    axios.post(url + `/comment/new`, { comment });
+  }
+} */
+
+export function* depositModificationSaga() {
+  while (true) {
+    const deposit = yield take([
+      mutations.SET_DEPOSIT_GROUP,
+      mutations.SET_DEPOSIT_NAME,
+      mutations.SET_DEPOSIT_STARTDATE,
+      mutations.SET_DEPOSIT_ADDRESS,
+      mutations.SET_DEPOSIT_PHONE,
+      mutations.SET_DEPOSIT_EMAIL,
+      mutations.SET_DEPOSIT_INCOME,
+      mutations.SET_DEPOSIT_CITY,
+      mutations.SET_DEPOSIT_OLD,
+      mutations.SET_DEPOSIT_COMPLETE,
+      mutations.SET_DEPOSIT_GENDER,
+    ]);
+    axios.post(url + `/deposit/update`, {
+      deposit: {
+        id: deposit.depositID,
+        group: deposit.groupID,
+        name: deposit.name,
+        startdate: deposit.startdate,
+        address: deposit.address,
+        phone: deposit.phone,
+        email: deposit.email,
+        income: deposit.income,
+        city: deposit.city,
+        isOld: deposit.isOld,
+        isComplete: deposit.isComplete,
+        gender: deposit.gender,
+      },
+    });
+  }
+}
+
+/* AUTH USER */
 export function* userAuthenticationSaga() {
   while (true) {
     const { username, password } = yield take(

@@ -16,7 +16,7 @@ export const TaskList = ({ tasks, name, createNewTask, id }) => (
         className='btn btn-primary btn-block mt-2'
         onClick={() => createNewTask(id)}
       >
-        Add New
+        Добавить
       </button>
     </div>
   </div>

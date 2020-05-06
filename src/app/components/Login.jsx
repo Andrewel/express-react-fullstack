@@ -9,27 +9,20 @@ import { Link } from 'react-router-dom';
 
 const LoginComponent = ({ authenticateUser, authenticated }) => (
   <div className='card p-3 col-6'>
-    <h2>Please login</h2>
-    <h3>
-      <Link to='signup'>
-        Don't have an account? <strong>Sign up.</strong>
-      </Link>
-    </h3>
     <form onSubmit={authenticateUser}>
       <input
-        type='text'
+        type='email'
         placeholder='login'
         name='username'
-        defaultValue='Dev'
+        defaultValue='vlason15@gmail.com'
         className='form-control'
-        /* onInvalid={(e) => e.target.setCustomValidity('Enter login')} */
         required
       />
       <input
         type='password'
         placeholder='password'
         name='password'
-        defaultValue='TUPLES'
+        defaultValue='123qweasd'
         className='form-control mt-2'
         required
       />
@@ -44,6 +37,11 @@ const LoginComponent = ({ authenticateUser, authenticated }) => (
         Login
       </button>
     </form>
+    <h6>
+      <Link to='signup'>
+        Вы не зарегистрированы? <strong>Зарегистрироваться.</strong>
+      </Link>
+    </h6>
   </div>
 );
 

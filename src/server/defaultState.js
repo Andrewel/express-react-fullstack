@@ -12,7 +12,7 @@ export const defaultState = {
         friends:[]
     }],
     groups:[{
-        name:"Clients Group",
+        name:"Clients",
         id:"G1",
         owner:"U1"
     },{

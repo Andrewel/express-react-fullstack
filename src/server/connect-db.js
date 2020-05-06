@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-const url = process.env.MONGODB_URI || `mongodb+srv://Andrewel:avpursuegoal@cluster0-rpgcx.mongodb.net/test?retryWrites=true&w=majority`; //mongodb://localhost:27017/organizer
+const url = process.env.MONGODB_URI || `mongodb+srv://Andrewel:avpursuegoal@cluster0-rpgcx.mongodb.net/test?retryWrites=true&w=majority`;
 let db = null;
 
 export async function connectDB(){

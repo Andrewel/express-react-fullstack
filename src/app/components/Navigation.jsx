@@ -23,7 +23,7 @@ const Navigation = ({ id, authenticated }) => (
     {authenticated ? (
       <div className='d-flex m-3'>
         <h4>
-          Welcome, <ConnectedUsernameDisplay id={id} />.
+          <ConnectedUsernameDisplay id={id} />.
         </h4>
         <button onClick={onExitButton} className='ml-2'>Выйти</button>
       </div>

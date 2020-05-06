@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedTaskDetail } from './TaskDetail';
+import { ConnectedDepositDetail } from './DepositDetail';
 import { ConnectedDashboard } from './Dashboard';
 import { ConnectedNavigation } from './Navigation';
 import { ConnectedLogin } from './Login';
@@ -34,6 +35,11 @@ export const Main = () => (
           exact
           path='/task/:id'
           render={RouteGuard(ConnectedTaskDetail)}
+        />
+        <Route
+          exact
+          path='/deposit/:id'
+          render={RouteGuard(ConnectedDepositDetail)}
         />
       </div>
     </Provider>
